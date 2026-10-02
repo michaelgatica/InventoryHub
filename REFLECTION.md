@@ -1,0 +1,9 @@
+# Reflection: How Copilot Assisted the Development Process
+
+Copilot assisted in the first activity by helping generate the initial integration code between the Blazor front end and the ASP.NET Core Minimal API back end. It helped outline the `FetchProducts.razor` component, the `HttpClient` call, and the product model needed to deserialize the API response. This made the first version of the application easier to build because the front end had a clear structure for calling the back-end endpoint and displaying product data.
+
+During the debugging activity, Copilot helped identify likely integration issues such as incorrect API routes, CORS restrictions, and malformed JSON responses. Those suggestions were used to update the client API call to `/api/productlist`, add CORS support in the server project, and wrap the API call in error handling logic. Copilot also helped refine the code so the user sees a clear error message instead of a broken page when the API is unavailable or the JSON response cannot be processed.
+
+For the JSON structure activity, Copilot helped design a standardized API response that includes product fields such as `id`, `name`, `price`, and `stock`, along with a nested `category` object. This improved the consistency of the back-end response and made the front-end model easier to understand and maintain. Copilot also helped confirm that the JSON response matched the structure expected by the Blazor client.
+
+During the optimization activity, Copilot helped suggest ways to reduce unnecessary API calls and improve performance. The final code includes client-side caching in `ProductApiClient` and memory caching in the back-end API to reduce repeated data processing. Overall, Copilot served as a coding assistant, debugger, and reviewer, but the final decisions about structure, routes, validation, caching, and documentation were made based on the project requirements.

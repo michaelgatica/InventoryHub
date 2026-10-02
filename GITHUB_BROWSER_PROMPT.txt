@@ -1,0 +1,26 @@
+Help me create and upload my final InventoryHub full-stack project to GitHub using the GitHub website.
+
+Use these settings:
+- Repository name: InventoryHub
+- Visibility: Public
+- Description: Full-stack Blazor WebAssembly and ASP.NET Core Minimal API inventory app with front-end/back-end integration, JSON structures, debugging fixes, and performance optimization.
+- Initial commit message: Initial InventoryHub full-stack project
+
+Important upload instructions:
+- I will unzip the project first.
+- Do not upload the zip file itself.
+- Upload the contents of the InventoryHub folder so the repository root contains:
+  - FullStackSolution.sln
+  - README.md
+  - REFLECTION.md
+  - TEST_PLAN.md
+  - JSON_STRUCTURE.md
+  - DEBUGGING_NOTES.md
+  - PERFORMANCE_NOTES.md
+  - ClientApp/
+  - ServerApp/
+- Make sure the repository root is not an extra nested folder.
+- After uploading, commit the files.
+- After the commit completes, show me the repository URL so I can submit it for my assignment.
+
+Please guide me step by step through the current GitHub web interface and pause whenever I need to choose files from my computer.

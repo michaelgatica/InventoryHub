@@ -1,0 +1,86 @@
+@page "/fetchproducts"
+
+@inject ProductApiClient ProductApiClient
+
+<PageTitle>Products | InventoryHub</PageTitle>
+
+<h1>Product List</h1>
+
+<p>
+    Product data is retrieved from the ASP.NET Core Minimal API endpoint
+    <code>/api/productlist</code>.
+</p>
+
+<button class="button-link" type="button" @onclick="RefreshProducts">
+    Refresh Products
+</button>
+
+@if (isLoading)
+{
+    <section class="card">
+        <p>Loading products...</p>
+    </section>
+}
+else if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <section class="card error-panel" role="alert">
+        <h2>Integration Error</h2>
+        <p>@errorMessage</p>
+    </section>
+}
+else if (!products.Any())
+{
+    <section class="card">
+        <p>No products were returned by the API.</p>
+    </section>
+}
+else
+{
+    <section class="product-grid">
+        @foreach (var product in products)
+        {
+            <article class="product-card" @key="product.Id">
+                <h2>@product.Name</h2>
+                <p><strong>Category:</strong> @product.Category.Name</p>
+                <p><strong>Price:</strong> @product.Price.ToString("C")</p>
+                <p><strong>Stock:</strong> @product.Stock</p>
+            </article>
+        }
+    </section>
+}
+
+@code {
+    private IReadOnlyList<Product> products = Array.Empty<Product>();
+    private bool isLoading = true;
+    private string errorMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProductsAsync();
+    }
+
+    private async Task RefreshProducts()
+    {
+        await LoadProductsAsync(forceRefresh: true);
+    }
+
+    private async Task LoadProductsAsync(bool forceRefresh = false)
+    {
+        isLoading = true;
+        errorMessage = string.Empty;
+
+        var result = await ProductApiClient.GetProductsAsync(forceRefresh);
+
+        if (result.IsSuccess && result.Value is not null)
+        {
+            products = result.Value;
+        }
+        else
+        {
+            products = Array.Empty<Product>();
+            errorMessage = result.Message ?? "An unknown error occurred while loading products.";
+        }
+
+        isLoading = false;
+    }
+}
